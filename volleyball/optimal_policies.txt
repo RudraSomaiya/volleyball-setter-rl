@@ -1,0 +1,69 @@
+OPTIMAL VOLLEYBALL SETTER POLICIES
+=====================================
+
+Based on the conditions (Pass Quality, Setter Position, Blocker Presence), 
+the optimal actions are:
+
+1. Bad Pass + Back Row + Blockers
+   → BEST: Pass
+   Reasoning: Limited options due to bad pass and back row position; 
+   pass is the safe conservative option with blockers present
+
+2. Bad Pass + Front Row + Blockers  
+   → BEST: Emergency
+   Reasoning: Emergency set is designed for bad passes; front row allows 
+   more options than back but blockers limit aggressive plays
+
+3. Bad Pass + Back Row + No Blockers
+   → BEST: Emergency
+   Reasoning: Without blockers, emergency set has better chance than pass;
+   still limited by back row position
+
+4. Bad Pass + Front Row + No Blockers
+   → BEST: Dump
+   Reasoning: Front row position allows dump; no blockers makes it highly 
+   effective even with bad pass
+
+5. Good Pass + Back Row + Blockers
+   → BEST: Quick or High (50/50)
+   Reasoning: Good pass enables offensive sets; back row limits dump;
+   quick/high equally viable with blockers
+
+6. Good Pass + Front Row + Blockers
+   → BEST: Quick or High (50/50)
+   Reasoning: Good pass enables all options; quick/high are best against
+   blockers from front row
+
+7. Good Pass + Back Row + No Blockers
+   → BEST: Quick or High (50/50)
+   Reasoning: Good pass + no blockers maximizes offensive potential;
+   quick/high both excellent options
+
+8. Good Pass + Front Row + No Blockers
+   → BEST: Quick, High, or Dump (all viable)
+   Reasoning: Optimal conditions - good pass, front row, no blockers;
+   multiple high-probability options including dump
+
+ILLEGAL ACTIONS
+================
+- Dump from Back Row: Always illegal (volleyball rules)
+- Pass/Emergency when Good Pass + No tactical reason: Suboptimal
+
+REWARD STRUCTURE
+================
+- Successful attack: +1.0
+- Failed attack: -1.0
+- Pass action: -0.2 (conservative play penalty)
+- Emergency when not needed: -0.3
+- No action chosen: -0.5
+- Illegal action (dump from back): -1.0
+- Multiple decisions: -1.0 (immediate termination)
+- Revisiting same decision: -0.5 (immediate termination)
+- Time penalty: -0.05 per step after 10 steps
+
+PROBABILITY ADJUSTMENTS
+=======================
+The success probabilities are set to encourage discovering these optimal policies:
+- Actions matching optimal policy get probability boosts
+- Suboptimal but legal actions have moderate probabilities
+- Illegal actions have very low or zero probability
