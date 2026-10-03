@@ -1,0 +1,4 @@
+numpy
+matplotlib
+jupyterlab
+# tkinter ships with most Python installers; on Linux install python3-tk
